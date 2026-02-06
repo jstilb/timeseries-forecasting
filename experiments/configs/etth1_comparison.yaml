@@ -1,0 +1,90 @@
+# ETTh1 Full Comparison Experiment
+# Compares all model families on the ETTh1 benchmark dataset
+
+name: etth1_comparison
+dataset: ETTh1
+target_col: OT
+
+# Data configuration
+data:
+  train_ratio: 0.7
+  val_ratio: 0.1
+  test_ratio: 0.2
+  normalization: standard
+
+# Feature engineering
+features:
+  lag_periods: [1, 2, 3, 6, 12, 24, 48]
+  rolling_windows: [6, 12, 24, 48, 168]
+  rolling_stats: [mean, std, min, max]
+  add_calendar: true
+  add_fourier: true
+  fourier_periods: [24, 168]
+  fourier_order: 3
+
+# Evaluation
+evaluation:
+  forecast_horizons: [24, 48, 96, 168]
+  walk_forward_splits: 5
+  walk_forward_strategy: expanding
+  walk_forward_min_train: 5000
+  walk_forward_gap: 0
+
+# Model configurations
+models:
+  naive:
+    enabled: true
+
+  seasonal_naive:
+    enabled: true
+    seasonal_period: 24
+
+  arima:
+    enabled: true
+    seasonal: true
+    m: 24
+    max_p: 5
+    max_q: 5
+
+  prophet:
+    enabled: true
+    yearly_seasonality: false
+    weekly_seasonality: true
+    daily_seasonality: true
+
+  holt_winters:
+    enabled: true
+    seasonal_periods: 24
+    trend: add
+    seasonal: add
+
+  lstm:
+    enabled: true
+    input_length: 96
+    hidden_size: 128
+    num_layers: 2
+    dropout: 0.1
+    attention_size: 64
+    learning_rate: 0.001
+    batch_size: 32
+    max_epochs: 50
+    patience: 10
+
+  transformer:
+    enabled: true
+    input_length: 96
+    d_model: 128
+    n_heads: 8
+    n_layers: 3
+    d_ff: 256
+    patch_length: 16
+    dropout: 0.1
+    learning_rate: 0.001
+    batch_size: 32
+    max_epochs: 50
+    patience: 10
+
+# MLflow
+mlflow:
+  tracking_uri: mlruns
+  experiment_name: etth1-comparison
