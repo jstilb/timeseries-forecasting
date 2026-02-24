@@ -218,3 +218,9 @@ docs/
 ## License
 
 [MIT](LICENSE)
+
+
+## Related Projects
+
+- [mlops-serving](https://github.com/jstilb/mlops-serving) — ML model serving with Docker and FastAPI
+- [meaningful_metrics](https://github.com/jstilb/meaningful_metrics) — ML evaluation metrics and governance
