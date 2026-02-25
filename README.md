@@ -215,6 +215,15 @@ docs/
 | Linting | ruff |
 | CI | GitHub Actions |
 
+## Related Projects
+
+This project is part of a broader AI engineering portfolio:
+
+- [meaningful_metrics](https://github.com/jstilb/meaningful_metrics) — Evaluation framework for measuring AI and ML system effectiveness
+- [llm-eval-framework](https://github.com/jstilb/llm-eval-framework) — LLM-as-judge evaluation pipeline for assessing model outputs
+- [modern-rag-pipeline](https://github.com/jstilb/modern-rag-pipeline) — Hybrid RAG pipeline for knowledge retrieval and augmentation
+- [mlops-serving](https://github.com/jstilb/mlops-serving) — Production ML model serving infrastructure with monitoring
+
 ## License
 
 [MIT](LICENSE)
