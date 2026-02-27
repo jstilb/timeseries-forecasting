@@ -223,3 +223,57 @@ This project is part of a broader AI engineering portfolio:
 - [llm-eval-framework](https://github.com/jstilb/llm-eval-framework) — LLM-as-judge evaluation pipeline for assessing model outputs
 - [modern-rag-pipeline](https://github.com/jstilb/modern-rag-pipeline) — Hybrid RAG pipeline for knowledge retrieval and augmentation
 - [mlops-serving](https://github.com/jstilb/mlops-serving) — Production ML model serving infrastructure with monitoring
+
+## Experiment Tracking — Weights & Biases
+
+Training runs are logged to a public W&B workspace. View live metrics, loss curves, and hyperparameter sweeps:
+
+**[Public W&B Project: jstilb/timeseries-forecasting](https://wandb.ai/jstilb/timeseries-forecasting)**
+
+The workspace includes:
+- Loss curves (train/val MSE per epoch) for all deep learning models
+- Hyperparameter sensitivity analysis (learning rate, hidden size, dropout rate)
+- Walk-forward validation metrics per fold
+- Model comparison dashboard across all 7 model variants
+- Monte Carlo Dropout uncertainty calibration plots
+
+To log your own runs:
+```bash
+pip install wandb
+wandb login  # or set WANDB_API_KEY
+python -m src.cli train --model lstm --horizon 24 --wandb-project timeseries-forecasting
+```
+
+## Foundation Models & Bridge to LLM/AI Engineering
+
+This project sits at the intersection of **traditional time series ML** and **modern LLM engineering** — the skills transfer directly.
+
+### Why This Matters for AI Engineers
+
+| Time Series Concept | LLM/AI Engineering Equivalent |
+|--------------------|-------------------------------|
+| Walk-forward validation | Held-out evaluation sets; no test-time leakage |
+| Moirai zero-shot forecast | GPT-4 zero-shot prompting — same concept, different domain |
+| Monte Carlo Dropout | LLM sampling temperature + uncertainty estimation |
+| Temporal attention (PatchTST) | Transformer self-attention — the core of all modern LLMs |
+| Foundation model fine-tuning | PEFT / LoRA fine-tuning of LLMs on domain data |
+| Distributional shift detection | LLM output distribution drift in production |
+
+### Foundation Model Integration
+
+The `notebooks/foundation_model_baseline.py` script demonstrates:
+- **Moirai** (Salesforce): A Transformer pre-trained on 27B+ time series observations
+- Zero-shot forecasting — no fine-tuning required on new datasets
+- Probabilistic outputs via sampling (same paradigm as LLM generation)
+- Benchmark against classical models (ARIMA, Prophet) and deep learning (LSTM, PatchTST)
+
+This is the same architectural pattern used in **GPT**, **LLaMA**, and other foundation models — just applied to time series instead of text.
+
+### Interactive Dashboard
+
+```bash
+pip install streamlit plotly
+streamlit run app.py
+```
+
+The dashboard allows real-time model comparison with confidence intervals, demonstrating production-ready ML visualization skills applicable to any AI system.
